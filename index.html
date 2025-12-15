@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graduation Slideshow</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+   <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #e5e7eb;
+      color: #1f2933;
+    }
+
+    .zek {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+      background: linear-gradient(to right, #BDC4D4, #52677D);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .zek h1 {
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    .ken {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .ken a {
+      width: 200px;
+      padding: 12px;
+      background: #2f3e53;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+
+    .ken a:hover {
+      background: #1abc9c;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .hero {
+      min-height: 90vh;
+      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(gradd.jpg);
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      animation: fadeInDown 1.2s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .content {
+      padding: 70px 20px;
+      text-align: center;
+      background: linear-gradient(to right, #F5EFEB, #C8D9E6);
+    }
+
+    .content h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 1.05rem;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 60px 30px;
+      background: #f8fafc;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #2f3e53;
+    }
+
+    footer {
+      background: #2f3e53;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="zek">
+    <h1>PHOTO SLIDESHOWS</h1>
+    <div class="ken">
+      <a href="zek.html">CREATE A SLIDESHOW</a>
+      <a href="about.html">ABOUT US</a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div>
+      <h1>📸 Welcome to Your Graduation Memories</h1>
+      <p>
+        Celebrate your journey, achievements, and unforgettable moments.
+        Share your graduation story with family and friends through a
+        beautiful and interactive slideshow.
+      </p>
+    </div>
+  </section>
+
+  <section class="content">
+    <h2>🎓 About This Website</h2>
+    <p>
+      This website helps you showcase your graduation memories in a creative
+      and meaningful way. Relive special moments, highlight achievements, and
+      create stunning slideshows that last a lifetime.
+    </p>
+  </section>
+
+  <section class="features">
+    <div class="card">
+      <h3>📷 Easy Photo Upload</h3>
+      <p>Upload your favorite graduation photos quickly and securely.</p>
+    </div>
+    <div class="card">
+      <h3>🎞️ Smooth Slideshows</h3>
+      <p>Enjoy clean transitions and animations that feel professional.</p>
+    </div>
+    <div class="card">
+      <h3>🌐 Share Anywhere</h3>
+      <p>Share your slideshow with friends and family on any device.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p> nekkenny carried / Created by nekkenny & lim</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CREATE A SLIDESHOW</title>
+
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+<style>
+
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --muted:#94a3b8;
+  --accent:#7c3aed;
+  --glass:rgba(255,255,255,0.06);
+}
+
+html{scroll-behavior:smooth}
+*{
+  box-sizing:border-box;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+  transition:background-color .3s,color .3s,transform .3s,box-shadow .3s;
+}
+
+body{
+  margin:0;
+  background:linear-gradient(180deg,#071024,#08121b);
+  color:#e6eef8;
+}
+
+
+.hero{
+  height:60vh;
+  background:url("https://images.unsplash.com/photo-1523580846011-d3a5bc25702b") center/cover fixed;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.6);
+}
+.hero-content{
+  position:relative;
+  text-align:center;
+  z-index:1;
+  animation:fadeUp 1.2s ease forwards;
+}
+.hero h1{font-size:3rem;margin-bottom:10px}
+.hero p{color:#cbd5f5;margin-bottom:20px}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.ken{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+}
+.ken a{
+  padding:12px 24px;
+  background:#7174a7;
+  color:#fff;
+  text-decoration:none;
+  border-radius:30px;
+}
+.ken a:hover{
+  background:lightseagreen;
+  transform:scale(1.05);
+}
+
+
+header{
+  padding:18px;
+  text-align:center;
+}
+main{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:20px;
+  padding:20px;
+}
+
+.panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  backdrop-filter:blur(12px);
+  border-radius:14px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.06);
+}
+
+
+.uploader{display:flex;flex-direction:column;gap:10px}
+button{
+  background:linear-gradient(180deg,var(--accent),#5b21b6);
+  border:none;
+  color:white;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+}
+button.ghost{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.2);
+}
+button:hover{transform:translateY(-2px)}
+
+
+.thumbs{
+  max-height:60vh;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.thumb{
+  display:flex;
+  gap:10px;
+  background:var(--glass);
+  padding:8px;
+  border-radius:10px;
+  cursor:grab;
+}
+.thumb:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+.thumb img{
+  width:80px;
+  height:60px;
+  object-fit:cover;
+  border-radius:6px;
+}
+.caption{
+  width:100%;
+  padding:6px;
+  border-radius:6px;
+  border:none;
+}
+
+
+.player{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+.stage{
+  width:100%;
+  max-width:900px;
+  aspect-ratio:16/9;
+  background:black;
+  border-radius:12px;
+  position:relative;
+  overflow:hidden;
+}
+.stage img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+}
+.captionOverlay{
+  position:absolute;
+  bottom:20px;
+  left:20px;
+  right:20px;
+  background:rgba(0,0,0,.6);
+  padding:12px;
+  border-radius:10px;
+  font-size:18px;
+}
+.controlsBar{display:flex;gap:10px;align-items:center}
+
+
+.hidden{opacity:0;transform:translateY(30px)}
+.show{opacity:1;transform:translateY(0)}
+
+
+footer{
+  text-align:center;
+  padding:14px;
+  color:var(--muted);
+  background:rgba(255,255,255,.02);
+  backdrop-filter:blur(6px);
+}
+
+
+@media(max-width:900px){
+  main{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>PHOTO SLIDESHOWS</h1>
+    <p>Create unforgettable graduation memories</p>
+    <div class="ken">
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT US</a>
+    </div>
+  </div>
+</section>
+
+<header>
+  <h2>Graduation Slideshow </h2>
+  <p style="color:var(--muted)">Fast • Simple • Beautiful</p>
+</header>
+
+<main>
+  
+  <aside class="panel hidden">
+    <h3>Build your slideshow</h3>
+    <div class="uploader">
+      <input id="fileInput" type="file" accept="image/*" multiple>
+      <button id="clearAll" class="ghost">Clear Slides</button>
+      <label>Slide duration (seconds)</label>
+      <input id="duration" type="number" value="3">
+      <label>Transition</label>
+      <select id="transition">
+        <option value="fade">Fade</option>
+        <option value="slide">Slide</option>
+      </select>
+      <div class="thumbs" id="thumbs"></div>
+      <button id="preview">Preview</button>
+    </div>
+  </aside>
+
+  
+  <section class="panel player hidden">
+    <h3>Preview</h3>
+    <div class="stage" id="stage"></div>
+    <div class="controlsBar">
+      <button id="prev" class="ghost">◀</button>
+      <button id="play">Play ▶</button>
+      <button id="pause" class="ghost">⏸</button>
+      <button id="next" class="ghost">▶</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+ 
+</footer>
+
+<script>
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.isIntersecting&&e.target.classList.add("show"))
+},{threshold:.15});
+document.querySelectorAll(".panel").forEach(p=>observer.observe(p));
+
+
+const state={slides:[],current:0,playing:false,timer:null};
+const fileInput=document.getElementById("fileInput");
+const stage=document.getElementById("stage");
+const thumbs=document.getElementById("thumbs");
+
+fileInput.onchange=e=>{
+  [...e.target.files].forEach(f=>{
+    const r=new FileReader();
+    r.onload=()=>{state.slides.push(r.result);render()};
+    r.readAsDataURL(f);
+  });
+};
+
+function render(){
+  stage.innerHTML="";
+  thumbs.innerHTML="";
+  state.slides.forEach((s,i)=>{
+    const img=document.createElement("img");
+    img.src=s;
+    if(i===state.current)img.style.opacity=1;
+    stage.appendChild(img);
+
+    const t=document.createElement("div");
+    t.className="thumb";
+    t.innerHTML=`<img src="${s}">`;
+    t.onclick=()=>show(i);
+    thumbs.appendChild(t);
+  });
+}
+
+function show(i){
+  const imgs=[...stage.children];
+  imgs.forEach(im=>{
+    im.style.opacity=0;
+    im.style.transform="scale(1.05)";
+  });
+  imgs[i].style.opacity=1;
+  imgs[i].style.transform="scale(1)";
+  state.current=i;
+}
+
+document.getElementById("next").onclick=()=>show((state.current+1)%state.slides.length);
+document.getElementById("prev").onclick=()=>show((state.current-1+state.slides.length)%state.slides.length);
+document.getElementById("play").onclick=()=>{
+  if(state.playing)return;
+  state.playing=true;
+  const run=()=>{
+    if(!state.playing)return;
+    document.getElementById("next").click();
+    state.timer=setTimeout(run,document.getElementById("duration").value*1000);
+  };
+  run();
+};
+document.getElementById("pause").onclick=()=>{state.playing=false;clearTimeout(state.timer)};
+document.getElementById("clearAll").onclick=()=>{state.slides=[];render()};
+document.getElementById("preview").onclick=()=>show(0);
+</script>
+
+</body>
+</html>
